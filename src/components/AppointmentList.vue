@@ -1,6 +1,5 @@
 <template>
   <div class="col-12 col-md-10 col-lg-7">
-
     <div class="list-group list-group-flush">
       <div
         class="list-group-item d-flex align-items-start"
@@ -28,11 +27,9 @@
           <div class="d-flex justify-content-between">
             <span
               contenteditable="true"
-              @blur="
-                $emit('edit', item.id, 'pet_name', $event.target.innerText)
-              "
+              @blur="$emit('edit', item.id, 'petName', $event.target.innerText)"
               class="h4 text-primary"
-              >{{ item.pet_name }}</span
+              >{{ item.petName }}</span
             >
             <span class="mr-auto">{{ formatDate(item.date) }}</span>
           </div>
@@ -41,10 +38,10 @@
             <span
               contenteditable="true"
               @blur="
-                $emit('edit', item.id, 'owner_name', $event.target.innerText)
+                $emit('edit', item.id, 'ownerName', $event.target.innerText)
               "
-              class="mr-auto"
-              >{{ item.owner_name }}</span
+              class="m-1"
+              >{{ item.ownerName }}</span
             >
           </div>
         </div>
@@ -56,15 +53,13 @@
 <script>
 import moment from "moment";
 
-
 export default {
   name: "AppointmentList",
   props: ["appointments"],
   methods: {
     formatDate: function (date) {
-      return moment.unix(date).format("MMM d, h:mm a");
+      return moment.unix(date).format("DD/MM ddd hh:mm A");
     },
   },
-
 };
 </script>

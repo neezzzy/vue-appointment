@@ -24,7 +24,7 @@
     </div>
 
     <div class="card-body" :class="{ 'd-none': hidepanel }">
-      <form id="aptForm" action="">
+      <form id="aptForm" @submit.prevent="requestAdd">
         <div class="form-group form-row">
           <label class="col col-form-label text-md-right" for="pet-name"
             >Pet Name</label
@@ -33,9 +33,10 @@
             <input
               type="text"
               class="form-control"
-              name="pet-name"
-              id="pet-name"
+              name="petName"
+              id="petName"
               placeholder="type pet's name..."
+              v-model="formData.petName"
             />
           </div>
         </div>
@@ -48,8 +49,9 @@
             <input
               type="text"
               class="form-control"
-              name="owner-name"
-              id="owner-name"
+              name="ownerName"
+              id="ownerName"
+              v-model="formData.ownerName"
               placeholder="type owner's name..."
             />
           </div>
@@ -64,9 +66,30 @@
               class="form-control"
               name="date"
               id="date"
+              v-model="formData.date"
               placeholder="type appointment date..."
             />
           </div>
+        </div>
+        <div class="form-group form-row">
+          <label class="col col-form-label text-md-right" for="owner-name"
+            >Time</label
+          >
+          <div class="col">
+            <input
+              type="time"
+              class="form-control"
+              name="time"
+              id="time"
+              v-model="formData.time"
+              placeholder="type appointment time..."
+            />
+          </div>
+        </div>
+        <div class="d-flex justify-content-end">
+          <button type="submit" class="btn btn-primary p-2 m-2">
+            Add Appointment
+          </button>
         </div>
       </form>
     </div>
@@ -76,9 +99,23 @@
 <script>
 export default {
   name: "AddAppointment",
+  methods: {
+    requestAdd: function () {
+      this.formData = {
+        petName: this.formData.petName,
+        ownerName: this.formData.ownerName,
+        date: Date.parse(this.formData.date + " " + this.formData.time),
+      };
+      this.$emit("add", this.formData);
+      this.formData = [];
+      this.hidepanel = true;
+    },
+  },
+
   data() {
     return {
       hidepanel: true,
+      formData: [],
     };
   },
 };
