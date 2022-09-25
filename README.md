@@ -1,6 +1,6 @@
 # Appointment-App
 
-![My Image](/hero.png)
+![My Image](/hero_1.png)
 
 ## Reason for making this application:
 - to learn Vue JS and its components
